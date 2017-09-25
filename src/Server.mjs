@@ -23,8 +23,8 @@ class Server {
     }
 
     broadcast(data) {
-        this.clients.forEach(client => {
-            client.send(data);
+        Object.keys(this.clients).forEach(key => {
+            this.clients[key].send(data);
         });
     }
 }

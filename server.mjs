@@ -1,4 +1,4 @@
-import Server from './src/Server.mjs';
+import Engine from './src/Engine.mjs';
 
-let serv = new Server();
-serv.run();
+let engine = new Engine();
+engine.start();
