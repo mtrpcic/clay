@@ -63,6 +63,11 @@
                     ? response.json().then((data) => JSON.stringify(data, null, 2))
                     : Promise.reject(new Error('Unexpected response'));
                 }
+
+                sendData(data){
+                    console.log(data);
+                    this.ws.send(data);
+                }
             }
 
             const showMessage = (message) => {
@@ -88,7 +93,9 @@
             wrap.connect();
 
             sendData.onclick = () => {
-                console.log("Clicked!");
+                console.log(commandInput);
+                let data = commandInput.value;
+                wrap.sendData(data);
             };
         })();
     </script>
