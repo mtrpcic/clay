@@ -1,6 +1,7 @@
 import SocketServer from './SocketServer';
 import WebServer from './WebServer';
 import gameloop from 'node-gameloop';
+import sequelize from './Models';
 
 export default class Engine {
     constructor(){
@@ -10,8 +11,14 @@ export default class Engine {
     }
 
     start() {
-        this.socket_server.run();
-        this.web_server.run();
+        console.log("Synchronizing Database...")
+        sequelize.sync().then(() => {
+            console.log("Starting Socket Server...");
+            this.socket_server.run();
+            console.log("Starting API Server");
+            this.web_server.run();
+            console.log("Clay is up and running!");
+        });
     }
 
     tick(){

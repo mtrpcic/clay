@@ -1,3 +1,4 @@
+import { Player } from '../Models';
 let routes = {
     'POST /users': (req, res) => {
         res.send("POST to users");
