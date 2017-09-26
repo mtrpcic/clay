@@ -1,9 +1,12 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import routes from './api/routes';
 
 class WebServer {
     constructor(){
         this.server = express();
+        this.server.use(bodyParser.json({ type: 'application/json'}));
+        this.server.use(express.static('client'));
     }
 
     run() {
@@ -12,7 +15,7 @@ class WebServer {
     }
 
     authenticateRequest() {
-        
+
     }
 
     initializeRoutes() {

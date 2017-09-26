@@ -1,7 +1,13 @@
 import { Player } from '../Models';
+
 let routes = {
     'POST /users': (req, res) => {
-        res.send("POST to users");
+        Player.create({
+            username: req.body.username,
+
+        }).then(() => {
+            
+        });
     },
 
     'POST /authenticate': (req, res) => {
