@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import routes from './api/routes';
+import authRoutes from './api/auth';
 
 class WebServer {
     constructor(){
@@ -14,17 +14,8 @@ class WebServer {
         this.server.listen(3000);
     }
 
-    authenticateRequest() {
-
-    }
-
     initializeRoutes() {
-        routes.forEach(route => {
-            let verb = route.verb;
-            let url = route.url;
-            let action = route.action;
-            this.server[verb](url, action);
-        });
+        this.server.use('/users', authRoutes);
     }
 }
 

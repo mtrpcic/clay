@@ -1,80 +1,7 @@
 <html>
     <head>
         <title>Clay Client</title>
-        <style>
-            body {
-                padding: 0;
-                margin: 0;
-                font-size: 16px;
-                font-family: monospace !important;
-            }
-
-            #input {
-                padding-top: 10px;
-                height: 80px;
-                width: 100%;
-                background-color: #EEE;
-            }
-
-            #input input {
-                width: calc(100% - 110px);
-            }
-
-            #input button {
-                width: 100px;
-            }
-
-            #input input, #input button {
-                display: inline-block;
-                line-height: 30px;
-            }
-
-            #output {
-                height: calc(100% - 80px);
-                background-color: black;
-                color: white;
-                width: 100%;
-            }
-
-        </style>
-        <script type="text/javascript">
-            class SocketWrapper {
-                constructor(url){
-                    this.server_url = url;
-                    this.ws = null;
-                    this.connected = false;
-                }
-
-                connect(){
-                    this.ws = new WebSocket(this.server_url);
-                }
-
-                disconnect(){
-                    this.ws.onerror = this.ws.onopen = this.ws.onclose = null;
-                    this.ws.close();
-                }
-
-                onError(){
-
-                }
-
-                onDataReceived(){
-                    return response.ok
-                    ? response.json().then((data) => JSON.stringify(data, null, 2))
-                    : Promise.reject(new Error('Unexpected response'));
-                }
-
-                sendData(data){
-                    console.log(data);
-                    this.ws.send(data);
-                }
-            }
-
-            const showMessage = (message) => {
-                output.textContent += `\n${message}`;
-                output.scrollTop = output.scrollHeight;
-            };
-        </script>
+        <link rel="stylesheet" type="text/css" href="./client.css">        
     </head>
     <body>
         <div id="output"></div>
@@ -83,21 +10,5 @@
             <input type="text" id="command"></input>
         </div>
     </body>
-    <script type="text/javascript">
-        (() => {
-            const output = document.querySelector('#output');
-            const sendData = document.querySelector('#sendData');
-            const commandInput = document.querySelector('#command');
-
-            let wrap = new SocketWrapper("ws://localhost:8080");
-            wrap.connect();
-            commandInput.focus();
-
-            sendData.onclick = () => {
-                wrap.sendData(commandInput.value);
-                commandInput.value = '';
-                commandInput.focus();
-            };
-        })();
-    </script>
+    <script type="text/javascript" src="./client.js"></script>
 </html>

@@ -1,0 +1,33 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    font-family: monospace !important;
+}
+
+#input {
+    padding-top: 10px;
+    height: 80px;
+    width: 100%;
+    background-color: #EEE;
+}
+
+#input input {
+    width: calc(100% - 110px);
+}
+
+#input button {
+    width: 100px;
+}
+
+#input input, #input button {
+    display: inline-block;
+    line-height: 30px;
+}
+
+#output {
+    height: calc(100% - 80px);
+    background-color: black;
+    color: white;
+    width: 100%;
+}
