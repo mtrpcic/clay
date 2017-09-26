@@ -1,3 +1,3 @@
-The Server class starts the websocket server loop and handles basic connections. When a client connects, a Client object is created for them and added to the Server to be managed. 
-
-Clients handle the logic for what happens when data comes across the wire and adding that data to the game loop.
+1. Game loop, socket server, basic client template, game ticks
+2. Models, Player, authentication, basic APIs
+3. Improved client, cleaned up API code, multiple characters

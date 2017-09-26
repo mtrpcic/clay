@@ -91,11 +91,12 @@
 
             let wrap = new SocketWrapper("ws://localhost:8080");
             wrap.connect();
+            commandInput.focus();
 
             sendData.onclick = () => {
-                console.log(commandInput);
-                let data = commandInput.value;
-                wrap.sendData(data);
+                wrap.sendData(commandInput.value);
+                commandInput.value = '';
+                commandInput.focus();
             };
         })();
     </script>

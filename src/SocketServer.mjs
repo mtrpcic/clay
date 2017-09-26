@@ -1,7 +1,7 @@
 import WebSocket from 'ws';
 import Client from './Client';
 
-class Server {
+class SocketServer {
     constructor(){
         this.wss = null;
         this.clients = {};
@@ -29,4 +29,4 @@ class Server {
     }
 }
 
-export default Server;
+export default SocketServer;
