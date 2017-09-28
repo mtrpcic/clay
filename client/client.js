@@ -1,3 +1,4 @@
+// Wrap and handle our socket connection
 class SocketWrapper {
     constructor(url){
         this.server_url = url;
@@ -30,11 +31,13 @@ class SocketWrapper {
     }
 }
 
+// Write a message to the output "console"
 const showMessage = (message) => {
     output.textContent += `\n${message}`;
     output.scrollTop = output.scrollHeight;
 };
 
+// Scope and execute our initialization code
 (() => {
     const output = document.querySelector('#output');
     const sendData = document.querySelector('#sendData');

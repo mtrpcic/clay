@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import authRoutes from './api/auth';
+import authRoutes from './api/account';
 
 class WebServer {
     constructor(){

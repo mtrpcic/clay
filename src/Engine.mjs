@@ -1,18 +1,17 @@
 import SocketServer from './SocketServer';
 import WebServer from './WebServer';
+import db from './Database';
 import gameloop from 'node-gameloop';
-import sequelize from './Models';
 
 export default class Engine {
     constructor(){
         this.socket_server = new SocketServer();
         this.web_server = new WebServer();
-        this.gameloop = gameloop.setGameLoop(this.tick.bind(this), 1000);
+        this.gameloop = gameloop.setGameLoop(this.tick.bind(this), 5000);
     }
 
     start() {
-        console.log("Synchronizing Database...")
-        sequelize.sync().then(() => {
+        db.ensureValidSchema().then(() => {
             console.log("Starting Socket Server...");
             this.socket_server.run();
             console.log("Starting API Server");
