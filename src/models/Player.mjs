@@ -4,30 +4,29 @@ export default function (sequelize, Sequelize) {
   const Player = sequelize.define('player', {
     id: {
       type: Sequelize.UUIDV4,
+      defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
     },
     username: {
       type: Sequelize.STRING,
-      validate: {
-        unique: true,
-        allowNull: false,
-      },
+      unique: true,
+      allowNull: false,
     },
     email: {
       type: Sequelize.STRING,
+      allowNull: true,
+      unique: true,
       validate: {
-        unique: true,
-        allowNull: true,
         isEmail: true,
       },
     },
     password: {
       type: Sequelize.VIRTUAL,
-      set: (val) => {
+      set(val) {
         this.setDataValue('password', val);
-        this.setDataValue('password_hash', bcrypt.hashSync(val, 10));
+        this.setDataValue('password_hash', bcrypt.hashSync(val));
       },
-      get: () => null,
+      // get() { return null; },
       validate: {
         isLongEnough: (val) => {
           if (val.length < 7) {
@@ -41,7 +40,7 @@ export default function (sequelize, Sequelize) {
 
   Player.authenticate = (username, password) => {
     const player = Player.where({ username });
-    bcrypt.compare(password, player.password_hash, (err, success) => success );
+    bcrypt.compare(password, player.password_hash, (err, success) => success);
   };
 
   Player.prototype.generatePasswordHash = () => {
