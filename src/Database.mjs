@@ -1,31 +1,27 @@
-import fs from 'fs';
-import path from 'path';
 import Sequelize from 'sequelize';
-
-import Player from './models/Player';
+import Player from './models/Player.mjs';
 
 const Database = {
-    Sequelize: Sequelize,
-    sequelize: new Sequelize('database', 'username', 'password', {
-        host: 'localhost',
-        dialect: 'sqlite',
-        storage: 'data/gamedata.sqlite'
-    }),
+  Sequelize,
+  sequelize: new Sequelize('database', 'username', 'password', {
+    host: 'localhost',
+    dialect: 'sqlite',
+    storage: 'data/gamedata.sqlite',
+  }),
 
-    ensureValidSchema(){
-        return this.sequelize.sync();
-    }
-
-}
+  ensureValidSchema() {
+    return this.sequelize.sync();
+  },
+};
 
 // Import all models automatically
-Database['Player'] = Player(Database.sequelize, Sequelize);
+Database.Player = Player(Database.sequelize, Sequelize);
 
 // Build model associations
-Object.keys(Database).forEach(modelName => {
-    if (Database[modelName] && "associate" in Database[modelName]) {
-        Database[modelName].associate(Database);
-    }
+Object.keys(Database).forEach((modelName) => {
+  if (Database[modelName] && 'associate' in Database[modelName]) {
+    Database[modelName].associate(Database);
+  }
 });
 
 // export shared model container
