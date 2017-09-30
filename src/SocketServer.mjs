@@ -2,13 +2,14 @@ import WebSocket from 'ws';
 import Client from './Client.mjs';
 
 class SocketServer {
-  constructor() {
+  constructor(port) {
+    this.port = port;
     this.wss = null;
     this.clients = {};
   }
 
   run() {
-    this.wss = new WebSocket.Server({ port: 8080 });
+    this.wss = new WebSocket.Server({ port: this.port });
     this.wss.on('connection', this.onClientConnect.bind(this));
   }
 

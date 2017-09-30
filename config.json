@@ -1,0 +1,7 @@
+{
+    "development": {
+        "hostname": "localhost",
+        "http_port": 4000,
+        "ws_port": 4001
+    }
+}

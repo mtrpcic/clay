@@ -4,9 +4,10 @@ import WebServer from './WebServer.mjs';
 import db from './Database.mjs';
 
 export default class Engine {
-  constructor() {
-    this.socket_server = new SocketServer();
-    this.web_server = new WebServer();
+  constructor(activeConfig) {
+    this.config = activeConfig;
+    this.socket_server = new SocketServer(activeConfig.ws_port);
+    this.web_server = new WebServer(activeConfig.http_port);
     this.gameloop = gameloop.setGameLoop(this.tick.bind(this), 5000);
   }
 
@@ -16,7 +17,7 @@ export default class Engine {
       this.socket_server.run();
       console.log('Starting API Server');
       this.web_server.run();
-      console.log('Clay is up and running!');
+      console.log(`Clay is up and running! Connect at http://${this.config.hostname}:${this.config.http_port}`);
     });
   }
 
